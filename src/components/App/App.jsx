@@ -5,7 +5,7 @@ import './App.css';
 import Footer from '../Footer/Footer';
 import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 function App() {
 
@@ -15,7 +15,11 @@ function App() {
         <header className='App-header'>
           <h1 className='App-title'>Prime Pizza</h1>
         </header>
-    
+        <nav>
+          <ul>
+            <li><Link to="/information">Information</Link></li>
+          </ul>
+        </nav>
         <img src='images/pizza_photo.png' />
         <p>Pizza is great.</p>
         <Route exact path="/information" >
