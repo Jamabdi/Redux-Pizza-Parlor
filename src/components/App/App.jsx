@@ -22,15 +22,21 @@ function App() {
             Total: ${total}
           </div>
         <Route exact path="/" >
+          <br /><br />
           <img src='images/pizza_photo.png' />
           <nav>
             <ul>
-              <Link to="/information">Information</Link>
+              <Link to="/select">View pizzas</Link>
+              <br />
+              <Link to="/information">Enter Information</Link>
             </ul>
           </nav>
         </Route>
         <Route exact path="/information" >
           <CustomerInfo />
+        </Route>
+        <Route exact path="/select">
+          <SelectPizza/>
         </Route>
       </Router>
     </div>
