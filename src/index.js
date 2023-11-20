@@ -13,9 +13,21 @@ const customer = (state = {}, action) => {
     return state;
 }
 
+// added fake pizza list for testing -Robin
+const pizzaList = (state = ['one cheese pizza'], action) => {
+    return state;
+}
+
+// added fake total for testing -Robin
+const total = (state =19.99, action) => {
+    return state;
+}
+
 const reduxStore = createStore(
     combineReducers({
-      customer
+      customer,
+      total,
+      pizzaList
     }),
     applyMiddleware(logger)
 );

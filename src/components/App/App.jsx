@@ -6,8 +6,10 @@ import Footer from '../Footer/Footer';
 import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
+  const total = useSelector(store => store.total);
 
   return (
     <div className='App'>
@@ -15,8 +17,10 @@ function App() {
         <header className='App-header'>
             <h1 className='App-title'>Prime Pizza</h1>
           </header>
-          <p>Total: {total}</p>
           <p>Pizza is great.</p>
+          <div style={{ float: 'right', marginRight: '20px'}}>
+            Total: ${total}
+          </div>
         <Route exact path="/" >
           <img src='images/pizza_photo.png' />
           <nav>
