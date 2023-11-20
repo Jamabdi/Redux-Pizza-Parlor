@@ -7,6 +7,8 @@ import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Box from '@mui/material/Box';
 
 function App() {
   const total = useSelector(store => store.total);
@@ -15,12 +17,22 @@ function App() {
     <div className='App'>
       <Router>
         <header className='App-header'>
-            <h1 className='App-title'>Prime Pizza</h1>
-          </header>
-          <p>Pizza is great.</p>
-          <div style={{ float: 'right', marginRight: '20px'}}>
+          <div>
+            <h1 className='App-title' style={{textAlign: 'center', margin: '0px'}}>Prime Pizza</h1>
+          </div>
+          <div style={{ 
+              float: 'right', 
+              marginRight: '20px', 
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+          }}>
+            <ShoppingCartIcon sx={{ marginRight: '6px' }}/>
             Total: ${total}
           </div>
+        </header>
+        <p>Pizza is great.</p>
+        <br />
         <Route exact path="/" >
           <br /><br />
           <img src='images/pizza_photo.png' />
