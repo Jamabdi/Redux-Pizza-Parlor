@@ -13,15 +13,17 @@ function App() {
     <div className='App'>
       <Router>
         <header className='App-header'>
-          <h1 className='App-title'>Prime Pizza</h1>
-        </header>
-        <nav>
-          <ul>
-            <li><Link to="/information">Information</Link></li>
-          </ul>
-        </nav>
-        <img src='images/pizza_photo.png' />
-        <p>Pizza is great.</p>
+            <h1 className='App-title'>Prime Pizza</h1>
+          </header>
+          <p>Pizza is great.</p>
+        <Route exact path="/" >
+          <img src='images/pizza_photo.png' />
+          <nav>
+            <ul>
+              <Link to="/information">Information</Link>
+            </ul>
+          </nav>
+        </Route>
         <Route exact path="/information" >
           <CustomerInfo />
         </Route>
