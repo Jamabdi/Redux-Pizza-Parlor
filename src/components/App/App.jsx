@@ -15,6 +15,7 @@ function App() {
         <header className='App-header'>
             <h1 className='App-title'>Prime Pizza</h1>
           </header>
+          <p>Total: {total}</p>
           <p>Pizza is great.</p>
         <Route exact path="/" >
           <img src='images/pizza_photo.png' />

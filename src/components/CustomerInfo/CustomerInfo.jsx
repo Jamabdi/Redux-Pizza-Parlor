@@ -56,64 +56,75 @@ function CustomerInfo() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <TextField 
-                label='Name'
-                required
-                type='text'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            >
-            </TextField>
-            <br />
-            <TextField 
-                label='Address'
-                required
-                type='text'
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-            >
-            </TextField>
-            < br />
-            <TextField 
-                label='City'
-                required
-                type='text'
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-            >
-            </TextField>
-            <br />
-            <TextField 
-                label='Zip'
-                required
-                type='text'
-                value={zip}
-                onChange={(e) => setZip(e.target.value)}
-            >
-            </TextField>
-            < br/>
-
-            <ToggleButtonGroup
-                orientation='horizontal'
-                size='medium'
-                value={method}
-                exclusive='true'
-                onChange={chooseMethod}
-            >
-                <ToggleButton value="Pick-up" key="Pick-up">
-                    <Tooltip title="Pick-up">
-                        <TakeoutDiningIcon label='pick-up' />
-                    </Tooltip>
-                </ToggleButton>,
-                <ToggleButton value="Delivery" key="Delivery">
-                    <Tooltip title="Delivery">
-                        <DeliveryDiningIcon label='delivery' />
-                    </Tooltip>
-                </ToggleButton> 
-            </ToggleButtonGroup>
-            <Button type='submit'>Next</Button>
-        </form>
+        <div>
+            <div>Total: ${total}</div>
+            <form onSubmit={handleSubmit}>
+                <ToggleButtonGroup
+                    orientation='horizontal'
+                    size='medium'
+                    value={method}
+                    exclusive
+                    onChange={chooseMethod}
+                >
+                    <ToggleButton 
+                        value="Pick-up" 
+                        key="Pick-up" 
+                        disableRipple 
+                        sx={{ padding: '15px 36px' }}> 
+                        <Tooltip title="Pick-up">
+                            <TakeoutDiningIcon label='pick-up' />
+                        </Tooltip>
+                    </ToggleButton>,
+                    <ToggleButton 
+                        value="Delivery" 
+                        key="Delivery" 
+                        disableRipple 
+                        sx={{ padding: '15px 36px' }}>
+                        <Tooltip title="Delivery">
+                            <DeliveryDiningIcon label='delivery' />
+                        </Tooltip>
+                    </ToggleButton> 
+                </ToggleButtonGroup>
+                <br />
+                <TextField 
+                    label='Name'
+                    required
+                    type='text'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                >
+                </TextField>
+                <br />
+                <TextField 
+                    label='Address'
+                    required
+                    type='text'
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                >
+                </TextField>
+                < br />
+                <TextField 
+                    label='City'
+                    required
+                    type='text'
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                >
+                </TextField>
+                <br />
+                <TextField 
+                    label='Zip'
+                    required
+                    type='text'
+                    value={zip}
+                    onChange={(e) => setZip(e.target.value)}
+                >
+                </TextField>
+                < br/>
+                <Button type='submit'>Next</Button>
+            </form>
+        </div>
     )
 }
 
