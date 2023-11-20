@@ -27,6 +27,11 @@ function App() {
         <Route exact path="/information" >
           <CustomerInfo />
         </Route>
+        
+        <Route exact path='/'>
+          <SelectPizza/>
+          </Route>
+
       </Router>
     </div>
   );
