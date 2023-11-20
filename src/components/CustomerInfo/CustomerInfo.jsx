@@ -10,34 +10,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'; 
 
 function CustomerInfo() {
-    const total = 20;
-    const pizzas = 'one cheese pizza';
+    const total = useSelector(store => store.total);
+    const pizzaList = useSelector(store => store.pizzaList);
     const dispatch = useDispatch();
 
+    // routes to next page on submission of form
     const history = useHistory();
     const nextPage = (event) => {
         history.push('/checkout');
     }
 
-    const clearFields = () => {
-        setName('');
-        setAddress('');
-        setCity('');
-        setZip('');
-        setMethod('');
-    }
-
+    // forces the toggle button to highlight one option
     const chooseMethod = (event, newMethod) => {
         if (newMethod !== null) {
             setMethod(newMethod);
         }
     }
 
+    // declares variables for customer information
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [method, setMethod] = useState('');
+    // compiles customer information into one object
     const customer = {
     customer_name: name,
     street_address: address,
@@ -45,18 +41,47 @@ function CustomerInfo() {
     zip: zip,
     type: method,
     total: total,
-    pizzas: pizzas}
+    pizzas: pizzaList}
 
+    // executes on submission of form, sends customer object to reducer
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(customer);
         const action = { type: 'SUBMIT_CUSTOMER_INFO', payload: customer }
         dispatch(action);
         nextPage();
-        clearFields();
     }
 
     return (
         <form onSubmit={handleSubmit}>
+            <br />
+            <ToggleButtonGroup
+                orientation='horizontal'
+                size='medium'
+                value={method}
+                exclusive
+                onChange={chooseMethod}
+            >
+                <ToggleButton 
+                    value="pickUp" 
+                    key="pickUp" 
+                    disableRipple 
+                    sx={{ padding: '15px 36px' }}> 
+                    <Tooltip title="Pick-up" placement='top'>
+                        <TakeoutDiningIcon label='pick-up' />
+                    </Tooltip>
+                </ToggleButton>,
+                <ToggleButton 
+                    value="delivery" 
+                    key="delivery" 
+                    disableRipple 
+                    sx={{ padding: '15px 36px' }}>
+                    <Tooltip title="Delivery" placement='top'>
+                        <DeliveryDiningIcon label='delivery' />
+                    </Tooltip>
+                </ToggleButton> 
+            </ToggleButtonGroup>
+            <br />
             <TextField 
                 label='Name'
                 required
@@ -93,25 +118,6 @@ function CustomerInfo() {
             >
             </TextField>
             < br/>
-
-            <ToggleButtonGroup
-                orientation='horizontal'
-                size='medium'
-                value={method}
-                exclusive='true'
-                onChange={chooseMethod}
-            >
-                <ToggleButton value="Pick-up" key="Pick-up">
-                    <Tooltip title="Pick-up">
-                        <TakeoutDiningIcon label='pick-up' />
-                    </Tooltip>
-                </ToggleButton>,
-                <ToggleButton value="Delivery" key="Delivery">
-                    <Tooltip title="Delivery">
-                        <DeliveryDiningIcon label='delivery' />
-                    </Tooltip>
-                </ToggleButton> 
-            </ToggleButtonGroup>
             <Button type='submit'>Next</Button>
         </form>
     )
