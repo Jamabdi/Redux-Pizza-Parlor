@@ -22,9 +22,15 @@ function App() {
         </nav>
         <img src='images/pizza_photo.png' />
         <p>Pizza is great.</p>
+        
         <Route exact path="/information" >
           <CustomerInfo />
         </Route>
+        
+        <Route exact path='/'>
+          <SelectPizza/>
+          </Route>
+
       </Router>
     </div>
   );
