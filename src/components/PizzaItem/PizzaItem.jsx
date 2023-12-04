@@ -7,12 +7,8 @@ import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
-
 const PizzaItem = (props) => {
     const dispatch = useDispatch();
-    const [pizzaList, setPizzaList] = useState([]);
-
-    const pizzas = useSelector(store => store.pizzas)
 
     const addPizza = () => {
         setQuantity(1);
