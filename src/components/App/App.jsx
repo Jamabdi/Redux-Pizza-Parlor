@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -8,36 +7,19 @@ import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import Admin from '../Admin/Admin';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-
+import Checkout from '../Checkout/Checkout';
+import axios from 'axios';
 
 function App() {
   const total = useSelector(store => store.total);
 
-  const dispatch = useDispatch();
-
-  // const [pizzaList, setPizzaList] = useState([]);
-
- const getPizzaList = () => {
-    axios.get('/api/pizza').then((response) => {
-      const action = { type: 'SET_PIZZA_LIST', payload: response.data };
-      dispatch(action);
-    }).catch((error) => {
-      console.error('Error getting pizza list', error);
-      alert('Something went wrong!');
-    })
-  }
-
-  useEffect(() => {
-    getPizzaList();
-  }, []);
-
   const buttonStyle = {
     marginBottom:'20px',
   };
-
 
   return (
     <div className='App'>
@@ -59,10 +41,11 @@ function App() {
               <br />
               <Link to="/information">
                 <Button variant="contained" style={buttonStyle}>Enter Information</Button>
-                </Link>
-
-
-             
+              </Link>
+              <br />
+              <Link to="/checkout">
+                <Button variant="contained" style={buttonStyle}>Checkout</Button>
+              </Link>
             </ul>
           </nav>
         </Route>
@@ -72,16 +55,16 @@ function App() {
         <Route exact path="/select">
           <SelectPizza/>
         </Route>
-
+        <Route exact path="/checkout">
+          <Checkout />
+        </Route>
         <br /> <br /> <br /> <br /> <br /> <br />
-
         <Route>
           <Footer/>
         </Route>
         <Route exact path="/admin">
           <Admin/>
         </Route>
-
       </Router>
     </div>
   );
