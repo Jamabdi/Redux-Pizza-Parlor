@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
+import Admin from '../Admin/Admin';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -51,6 +51,9 @@ function App() {
         </Route>
         <Route>
           <Footer/>
+        </Route>
+        <Route exact path="/admin">
+          <Admin/>
         </Route>
       </Router>
     </div>
