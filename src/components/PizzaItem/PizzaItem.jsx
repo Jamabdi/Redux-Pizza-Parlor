@@ -1,0 +1,41 @@
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia'
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
+
+const PizzaItem = (props) => {
+    const dispatch = useDispatch();
+    const [pizzaList, setPizzaList] = useState([]);
+
+    const pizzas = useSelector(store => store.pizzas)
+
+    const addPizza = () => {
+        setQuantity(1);
+        const action = { type: 'ADD_PIZZA_ITEM', payload: props.pizza};
+        dispatch(action);
+    }
+
+    const removePizza = () => {
+        setQuantity(0);
+        const action = { type: 'REMOVE_PIZZA_ITEM', payload: props.pizza}
+        dispatch(action);
+    }
+
+    return (
+        <ul>
+            {/* {pizzaList.map((pizza) => {
+                return <PizzaItem key={pizza.id} pizza={pizza} />
+            })} */}
+            {pizzaList.map((pizza) => 
+          <li key={pizza.id}> pizza ={pizza}</li>  
+        )}
+        </ul>
+    )
+}
+
+export default PizzaItem;

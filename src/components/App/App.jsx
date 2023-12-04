@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -13,6 +15,24 @@ import { Button } from '@mui/material';
 
 function App() {
   const total = useSelector(store => store.total);
+
+  const dispatch = useDispatch();
+
+  // const [pizzaList, setPizzaList] = useState([]);
+
+ const getPizzaList = () => {
+    axios.get('/api/pizza').then((response) => {
+      const action = { type: 'SET_PIZZA_LIST', payload: response.data };
+      dispatch(action);
+    }).catch((error) => {
+      console.error('Error getting pizza list', error);
+      alert('Something went wrong!');
+    })
+  }
+
+  useEffect(() => {
+    getPizzaList();
+  }, []);
 
   const buttonStyle = {
     marginBottom:'20px',
