@@ -30,7 +30,7 @@ const PizzaItem = (props) => {
         <ul>
           
             {pizzaList.map((pizza) => 
-          <li key={pizza.id}> pizza ={pizza}</li>  
+          <li>{pizza}</li>  
         )}
         </ul>
     )
