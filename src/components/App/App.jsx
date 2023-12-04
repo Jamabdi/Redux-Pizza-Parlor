@@ -1,6 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
+
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -12,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+
 
 function App() {
   const total = useSelector(store => store.total);
@@ -38,6 +38,7 @@ function App() {
     marginBottom:'20px',
   };
 
+
   return (
     <div className='App'>
       <Router>
@@ -59,6 +60,8 @@ function App() {
               <Link to="/information">
                 <Button variant="contained" style={buttonStyle}>Enter Information</Button>
                 </Link>
+
+
              
             </ul>
           </nav>
@@ -69,13 +72,16 @@ function App() {
         <Route exact path="/select">
           <SelectPizza/>
         </Route>
+
         <br /> <br /> <br /> <br /> <br /> <br />
+
         <Route>
           <Footer/>
         </Route>
         <Route exact path="/admin">
           <Admin/>
         </Route>
+
       </Router>
     </div>
   );

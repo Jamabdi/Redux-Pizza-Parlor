@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import PizzaItem from '../PizzaItem/PizzaItem';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 
 const SelectPizza = () => {
@@ -24,10 +21,7 @@ useEffect(() => {
 
 
     return (
-        <>
-        <h3>Order from any of our Pizza's below!</h3>
-       <PizzaItem/>
-       </>
+
     )
 }
 
