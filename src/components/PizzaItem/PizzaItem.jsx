@@ -10,6 +10,9 @@ import { useState } from 'react';
 
 const PizzaItem = (props) => {
     const dispatch = useDispatch();
+    const [pizzaList, setPizzaList] = useState([]);
+
+    const pizzas = useSelector(store => store.pizzas)
 
     const addPizza = () => {
         setQuantity(1);
@@ -32,7 +35,6 @@ const PizzaItem = (props) => {
             {props.pizza.description}
             <br />
             <img src={props.pizza.image_path} />
-
         </p>
     )
 }

@@ -6,6 +6,14 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import logger from 'redux-logger';
 
+const pizzaList = (state = [], action) => {
+    if (action.type === 'SET_PIZZA_LIST') {
+        return action.payload;
+    }
+    return state;
+}
+
+
 const customer = (state = {}, action) => {
     if (action.type === 'SUBMIT_CUSTOMER_INFO') {
         return action.payload;
@@ -14,9 +22,9 @@ const customer = (state = {}, action) => {
 }
 
 // added fake pizza list for testing -Robin
-const pizzaList = (state = ['one cheese pizza'], action) => {
-    return state;
-}
+// const pizzaList = (state = ['one cheese pizza'], action) => {
+//     return state;
+// }
 
 // added fake total for testing -Robin
 const total = (state =19.99, action) => {
@@ -27,7 +35,8 @@ const reduxStore = createStore(
     combineReducers({
       customer,
       total,
-      pizzaList
+      pizzaList,
+      pizzas
     }),
     applyMiddleware(logger)
 );

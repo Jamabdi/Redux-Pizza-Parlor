@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
+
+
 
 const SelectPizza = () => {
+
+    const textPlacement = {
+        marginTop:'60px',
+      };
 
 const [pizzaList, setPizzaList] = useState([]);
 
@@ -22,15 +25,10 @@ useEffect(() => {
 
 
     return (
-        <div>
-            <Button variant="contained" component={Link} to="/info">Next</Button>
-            <div className="pizzaDisplay">
-            
-            {pizzaList.map((pizza) => {
-                return <PizzaItem key={pizza.id} pizza={pizza} />
-            })}
-            </div>
-        </div>
+        <>
+        <h3 style = {textPlacement}>Order from any of our Pizza's below!</h3>
+       <PizzaItem/>
+       </>
     )
 }
 
