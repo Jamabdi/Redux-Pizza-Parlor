@@ -35,8 +35,7 @@ const reduxStore = createStore(
     combineReducers({
       customer,
       total,
-      pizzaList,
-      pizzas
+      pizzaList
     }),
     applyMiddleware(logger)
 );

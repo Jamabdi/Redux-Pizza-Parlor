@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 function CustomerInfo() {
     const total = useSelector(store => store.total);
     const pizzaList = useSelector(store => store.pizzaList);
+    const customer = useSelector(store => store.customer);
     const dispatch = useDispatch();
 
     // routes to next page on submission of form
@@ -28,13 +29,13 @@ function CustomerInfo() {
     }
 
     // declares variables for customer information
-    const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [zip, setZip] = useState('');
-    const [method, setMethod] = useState('');
+    const [name, setName] = useState(customer.name);
+    const [address, setAddress] = useState(customer.address);
+    const [city, setCity] = useState(customer.city);
+    const [zip, setZip] = useState(customer.zip);
+    const [method, setMethod] = useState(customer.method);
     // compiles customer information into one object
-    const customer = {
+    const newCustomer = {
     customer_name: name,
     street_address: address,
     city: city,
@@ -46,15 +47,20 @@ function CustomerInfo() {
     // executes on submission of form, sends customer object to reducer
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(customer);
-        const action = { type: 'SUBMIT_CUSTOMER_INFO', payload: customer }
+        console.log(newCustomer);
+        const action = { type: 'SUBMIT_CUSTOMER_INFO', payload: newCustomer }
         dispatch(action);
         nextPage();
     }
 
     return (
         <form onSubmit={handleSubmit}>
-
+            <br /><br /><br /> <br /><br /><br /><br /> <br /><br />
+            <ToggleButtonGroup
+                required
+                sx={[ 
+                    {backgroundColor: 'white'},
+                ]}
                 orientation='horizontal'
                 size='medium'
                 value={method}
@@ -62,19 +68,37 @@ function CustomerInfo() {
                 onChange={chooseMethod}
             >
                 <ToggleButton 
-                    value="pickUp" 
+                    value="Pick-up" 
                     key="pickUp" 
                     disableRipple 
-
+                    sx={[{ padding: '15px 36px' },
+                        {'&:focus': {
+                            backgroundColor: 'tomato',
+                        }},
+                        {'&:active': {
+                            backgroundColor: 'tomato',
+                        }},
+                        {'&:hover': {
+                            backgroundColor: 'white',
+                        }}]}> 
                     <Tooltip title="Pick-up" placement='top'>
                         <TakeoutDiningIcon label='pick-up' />
                     </Tooltip>
                 </ToggleButton>,
                 <ToggleButton 
-                    value="delivery" 
+                    value="Delivery" 
                     key="delivery" 
                     disableRipple 
-
+                    sx={[{ padding: '15px 36px' },
+                        {'&:focus': {
+                            backgroundColor: 'tomato',
+                        }},
+                        {'&:active': {
+                            backgroundColor: 'tomato',
+                        }},
+                        {'&:hover': {
+                            backgroundColor: 'white',
+                        }}]}> 
                     <Tooltip title="Delivery" placement='top'>
                         <DeliveryDiningIcon label='delivery' />
                     </Tooltip>
@@ -85,7 +109,7 @@ function CustomerInfo() {
                 label='Name'
                 required
                 type='text'
-                value={name}
+                value={customer.customer_name}
                 onChange={(e) => setName(e.target.value)}
             >
             </TextField>
@@ -94,7 +118,7 @@ function CustomerInfo() {
                 label='Address'
                 required
                 type='text'
-                value={address}
+                value={customer.street_address}
                 onChange={(e) => setAddress(e.target.value)}
             >
             </TextField>
@@ -103,7 +127,7 @@ function CustomerInfo() {
                 label='City'
                 required
                 type='text'
-                value={city}
+                value={customer.city}
                 onChange={(e) => setCity(e.target.value)}
             >
             </TextField>
@@ -112,12 +136,23 @@ function CustomerInfo() {
                 label='Zip'
                 required
                 type='text'
-                value={zip}
+                value={customer.zip}
                 onChange={(e) => setZip(e.target.value)}
             >
             </TextField>
             < br/>
-
+            <Button 
+                sx={[ {backgroundColor: 'tomato'},
+                    {
+                      '&:hover': {
+                        backgroundColor: 'green',
+                      },
+                    }
+                ]}
+                variant='contained' 
+                type='submit'>
+                    Next
+            </Button>
         </form>
     )
 }
