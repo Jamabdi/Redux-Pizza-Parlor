@@ -1,18 +1,16 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardActions, CardMedia, CardContent, 
+    Grid, Button, IconButton, TextField } from '@mui/material';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 const PizzaItem = (props) => {
     const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(0);
 
     const addPizza = () => {
-        setQuantity(1);
-        const action = { type: 'ADD_PIZZA_ITEM', payload: props.pizza};
+        const action = { type: 'ADD_PIZZA_ITEM', payload: {pizza: props.pizza, quantity: quantity}};
         dispatch(action);
     }
 
@@ -22,16 +20,57 @@ const PizzaItem = (props) => {
         dispatch(action);
     }
 
+    function increaseQuantity() {
+        setQuantity(quantity+1);
+    }
+
+    function decreaseQuantity() {
+        if (quantity > 0) {
+            setQuantity(quantity-1);
+        }
+    }
+
     return (
-        <p>
-            {props.pizza.name}
-            <br />
-            {props.pizza.price}
-            <br />
-            {props.pizza.description}
-            <br />
-            <img src={props.pizza.image_path} />
-        </p>
+        <Grid item m={3}>
+            <Card sx={[ 
+                {marginTop: '10px'},
+                {height: '700px'},
+                {maxWidth: '400px'},
+                {display: 'flex'}, 
+                {flexDirection: 'column'},
+                {borderRadius: '20px'}, 
+                {backgroundColor: 'white'},
+                {boxShadow: '-2px 2px 10px 5px rgb(90, 90, 90)'},
+                {'&:hover': {
+                    backgroundColor: 'antiquewhite'
+                }}
+            ]}>
+                <CardMedia sx={{
+                    width: 'auto'
+                }}>
+                    <img src={props.pizza.image_path} />
+                </CardMedia>
+                <CardContent sx={{
+                    padding: '0px'
+                }}>
+                    <h3>{props.pizza.name}</h3>
+                    ${props.pizza.price}
+                </CardContent>
+                <CardActions sx={{ justifyContent: 'center', padding: '0px' }}>
+                    <Button variant='contained' onClick={addPizza} sx={{ color: 'black', backgroundColor: 'tomato' }}>Add to cart</Button>
+                    <IconButton onClick={decreaseQuantity}>
+                        <RemoveIcon sx={{fontSize: '40px', color:'rgb(133, 133, 133)'}} />   
+                    </IconButton>
+                    {quantity}
+                    <IconButton onClick={increaseQuantity}>
+                        <AddIcon sx={{fontSize: '40px', color:'rgb(133, 133, 133)'}} />   
+                    </IconButton>
+                </CardActions>
+                <CardContent>
+                    <p style={{textAlign: 'left'}}>{props.pizza.description}</p>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
