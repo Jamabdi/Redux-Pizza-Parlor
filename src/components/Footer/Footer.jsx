@@ -1,11 +1,11 @@
 import React from 'react';
-import './Footer.css';
+// import './App.css';
 
 function Footer() {
     return (
         
-    <footer>
-        <h1></h1>
+    <footer className = 'App-footer'>
+        <h1>Made by Jama, Robin, and Stephon.</h1>
     </footer>
         
     )

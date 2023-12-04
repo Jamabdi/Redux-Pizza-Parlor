@@ -38,6 +38,9 @@ function App() {
         <Route exact path="/select">
           <SelectPizza/>
         </Route>
+        <Route>
+          <Footer/>
+        </Route>
       </Router>
     </div>
   );
