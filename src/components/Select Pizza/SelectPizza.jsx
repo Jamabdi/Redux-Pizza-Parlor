@@ -6,6 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const SelectPizza = () => {
 
+    const textPlacement = {
+        marginTop:'60px',
+      };
+
 const [pizzaList, setPizzaList] = useState([]);
 
 const getPizzaList = () => {
@@ -25,7 +29,7 @@ useEffect(() => {
 
     return (
         <>
-        <h3>Order from any of our Pizza's below!</h3>
+        <h3 style = {textPlacement}>Order from any of our Pizza's below!</h3>
        <PizzaItem/>
        </>
     )

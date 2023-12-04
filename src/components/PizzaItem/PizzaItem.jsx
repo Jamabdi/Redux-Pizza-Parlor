@@ -28,9 +28,7 @@ const PizzaItem = (props) => {
 
     return (
         <ul>
-            {/* {pizzaList.map((pizza) => {
-                return <PizzaItem key={pizza.id} pizza={pizza} />
-            })} */}
+          
             {pizzaList.map((pizza) => 
           <li key={pizza.id}> pizza ={pizza}</li>  
         )}
