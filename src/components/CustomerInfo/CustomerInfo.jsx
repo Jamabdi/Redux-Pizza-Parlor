@@ -54,11 +54,7 @@ function CustomerInfo() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <br /><br /><br /> <br /><br /><br /><br /> <br /><br />
-            <ToggleButtonGroup
-                sx={[ 
-                    {backgroundColor: 'white'},
-                ]}
+
                 orientation='horizontal'
                 size='medium'
                 value={method}
@@ -69,16 +65,7 @@ function CustomerInfo() {
                     value="pickUp" 
                     key="pickUp" 
                     disableRipple 
-                    sx={[{ padding: '15px 36px' },
-                        {'&:focus': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:active': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:hover': {
-                            backgroundColor: 'white',
-                        }}]}> 
+
                     <Tooltip title="Pick-up" placement='top'>
                         <TakeoutDiningIcon label='pick-up' />
                     </Tooltip>
@@ -87,16 +74,7 @@ function CustomerInfo() {
                     value="delivery" 
                     key="delivery" 
                     disableRipple 
-                    sx={[{ padding: '15px 36px' },
-                        {'&:focus': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:active': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:hover': {
-                            backgroundColor: 'white',
-                        }}]}> 
+
                     <Tooltip title="Delivery" placement='top'>
                         <DeliveryDiningIcon label='delivery' />
                     </Tooltip>
@@ -139,18 +117,7 @@ function CustomerInfo() {
             >
             </TextField>
             < br/>
-            <Button 
-                sx={[ {backgroundColor: 'tomato'},
-                    {
-                      '&:hover': {
-                        backgroundColor: 'green',
-                      },
-                    }
-                ]}
-                variant='contained' 
-                type='submit'>
-                    Next
-            </Button>
+
         </form>
     )
 }

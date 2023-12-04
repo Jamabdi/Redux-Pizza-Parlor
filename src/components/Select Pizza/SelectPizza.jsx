@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import PizzaItem from '../PizzaItem/PizzaItem';
-import { useSelector, useDispatch } from 'react-redux';
+
 
 
 const SelectPizza = () => {
