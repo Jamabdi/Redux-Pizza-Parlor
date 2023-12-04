@@ -92,7 +92,7 @@ This page should have a next button that brings the user to the **enter order de
 
 ![Select Pizza View](wireframes/screen-one.png)
 
-### ORDER - ENTER CUSTOMER INFORMATION
+### ORDER - ENTER CUSTOMER INFORMATION 
 
 Collect user information, *name*, *street address*, *city* and *zip*. This page should have an option to select pickup vs. delivery. The total cost of the order should appear in the top right of this page. This page should have a next button that brings the user to the **checkout** page.
 
@@ -119,3 +119,4 @@ This page **should not** appear in the navigation bar. Eventually the client wou
 - Add pictures to the `public/images` folder and update the image url for each pizza in the database.
 - Add a button on the orders page to track delivery status.
 - Allow admins to click on an order and see all of the details for that order (which pizzas were a part of that particular order). For the details of the order with `id` of `1`, it will be available to anyone with the url [http://localhost:3000/order/1](http://localhost:3000/order/1). This route is not built on the server, so you will need to create it.
+

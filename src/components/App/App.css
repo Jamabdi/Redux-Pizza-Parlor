@@ -13,3 +13,53 @@
 .App-title {
   font-size: 2em;
 }
+
+.App-footer {
+  background-color: #222;
+  height: 70px;
+  padding: 20px;
+  color: white;
+  position:fixed;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
+#table {
+  margin: auto;
+}
+
+#th {
+  text-align: left;
+  font-size: 18px;
+  color: black;
+  font-weight: 300;
+}
+
+td {
+  padding-left: 50px;
+  text-align: right;
+  color: rgb(0, 0, 0);
+  font-weight: 300;
+}
+
+#row {
+  background-color: #93b9f5;
+}
+
+#tr:nth-child(odd) { 
+  background-color: #f0f2f5;
+} 
+
+#admin-table, td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+}
+
+.admin-table {
+  width: 80%;
+  border: 3px solid black;
+}
