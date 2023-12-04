@@ -5,7 +5,7 @@ function Footer() {
     return (
         
     <footer className = 'App-footer'>
-        <h1>Made by Jama, Robin, and Stephon.</h1>
+        <h4>Made by Jama, Robin, and Stephon.</h4>
     </footer>
         
     )

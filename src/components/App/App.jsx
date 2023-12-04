@@ -49,6 +49,7 @@ function App() {
         <Route exact path="/select">
           <SelectPizza/>
         </Route>
+        <br /> <br /> <br /> <br /> <br /> <br />
         <Route>
           <Footer/>
         </Route>
