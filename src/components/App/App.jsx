@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -10,15 +11,33 @@ import { useSelector, useDispatch } from 'react-redux';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-import Checkout from '../Checkout/Checkout';
 
 
 function App() {
   const total = useSelector(store => store.total);
 
+  const dispatch = useDispatch();
+
+  // const [pizzaList, setPizzaList] = useState([]);
+
+ const getPizzaList = () => {
+    axios.get('/api/pizza').then((response) => {
+      const action = { type: 'SET_PIZZA_LIST', payload: response.data };
+      dispatch(action);
+    }).catch((error) => {
+      console.error('Error getting pizza list', error);
+      alert('Something went wrong!');
+    })
+  }
+
+  useEffect(() => {
+    getPizzaList();
+  }, []);
+
   const buttonStyle = {
     marginBottom:'20px',
   };
+
 
   return (
     <div className='App'>
@@ -41,9 +60,8 @@ function App() {
               <Link to="/information">
                 <Button variant="contained" style={buttonStyle}>Enter Information</Button>
                 </Link>
-              <Link to="/checkout">
-                <Button varient="contained" style={buttonStyle}> Checkout</Button>
-              </Link>
+
+
              
             </ul>
           </nav>
@@ -54,15 +72,16 @@ function App() {
         <Route exact path="/select">
           <SelectPizza/>
         </Route>
+
+        <br /> <br /> <br /> <br /> <br /> <br />
+
         <Route>
           <Footer/>
         </Route>
         <Route exact path="/admin">
           <Admin/>
         </Route>
-        <Route exact path="/checkout">
-          <Checkout />
-        </Route>
+
       </Router>
     </div>
   );

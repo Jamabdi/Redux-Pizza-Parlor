@@ -8,6 +8,10 @@
   padding: 20px;
   color: white;
   margin-bottom: 20px;
+  position: fixed;
+  left:0;
+  top:0;
+  right:0;
 }
 
 .App-title {
@@ -16,8 +20,7 @@
 
 .App-footer {
   background-color: #222;
-  height: 70px;
-  padding: 20px;
+
   color: white;
   position:fixed;
   left:0;
