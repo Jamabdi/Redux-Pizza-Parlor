@@ -13,21 +13,33 @@ const pizzaList = (state = [], action) => {
     return state;
 }
 
+const cart = (state = [], action) => {
+    if (action.type === 'CLEAR') {
+        return [];
+    }
+    if (action.type === 'ADD_PIZZA_ITEM') {
+        return [...state, action.payload];
+    }
+    return state;
+}
 
 const customer = (state = {}, action) => {
+    if (action.type === 'CLEAR') {
+        return {};
+    }
     if (action.type === 'SUBMIT_CUSTOMER_INFO') {
         return action.payload;
     }
     return state;
 }
 
-// added fake pizza list for testing -Robin
-// const pizzaList = (state = ['one cheese pizza'], action) => {
-//     return state;
-// }
-
-// added fake total for testing -Robin
-const total = (state =19.99, action) => {
+const total = (state = 0, action) => {
+    if (action.type === 'CLEAR') {
+        return 0;
+    }
+    if (action.type === 'ADD_PIZZA_ITEM') {
+        return state + (action.payload.pizza.price * action.payload.quantity);
+    }
     return state;
 }
 
@@ -35,7 +47,8 @@ const reduxStore = createStore(
     combineReducers({
       customer,
       total,
-      pizzaList
+      pizzaList,
+      cart
     }),
     applyMiddleware(logger)
 );

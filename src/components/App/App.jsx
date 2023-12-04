@@ -7,18 +7,15 @@ import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import Admin from '../Admin/Admin';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Checkout from '../Checkout/Checkout';
-import axios from 'axios';
 
 function App() {
   const total = useSelector(store => store.total);
 
   const buttonStyle = {
     marginBottom:'20px',
+    backgroundColor:'tomato'
   };
 
   return (
@@ -32,21 +29,14 @@ function App() {
         <Route exact path="/" >
           <br /><br />
           <img src='images/pizza_photo.png' />
+          <br /><br />
           <nav>
-            <ul>
-        
+            <div>
               <Link to="/select">
                 <Button variant="contained" style={buttonStyle}>View pizzas</Button>
               </Link>
               <br />
-              <Link to="/information">
-                <Button variant="contained" style={buttonStyle}>Enter Information</Button>
-              </Link>
-              <br />
-              <Link to="/checkout">
-                <Button variant="contained" style={buttonStyle}>Checkout</Button>
-              </Link>
-            </ul>
+            </div>
           </nav>
         </Route>
         <Route exact path="/information" >

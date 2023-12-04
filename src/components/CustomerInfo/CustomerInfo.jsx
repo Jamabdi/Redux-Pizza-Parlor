@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ToggleButton from '@mui/material/ToggleButton';
+import MuiToggleButton from '@mui/material/ToggleButton';
+import { styled } from "@mui/material/styles";
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
 import Tooltip from '@mui/material/Tooltip';
@@ -11,7 +12,7 @@ import { useHistory } from 'react-router-dom';
 
 function CustomerInfo() {
     const total = useSelector(store => store.total);
-    const pizzaList = useSelector(store => store.pizzaList);
+    const pizzas = useSelector(store => store.cart);
     const customer = useSelector(store => store.customer);
     const dispatch = useDispatch();
 
@@ -19,6 +20,9 @@ function CustomerInfo() {
     const history = useHistory();
     const nextPage = (event) => {
         history.push('/checkout');
+    }
+    const goBack = (event) => {
+        history.push('/select');
     }
 
     // forces the toggle button to highlight one option
@@ -42,7 +46,7 @@ function CustomerInfo() {
     zip: zip,
     type: method,
     total: total,
-    pizzas: pizzaList}
+    pizzas: pizzas}
 
     // executes on submission of form, sends customer object to reducer
     const handleSubmit = (event) => {
@@ -53,14 +57,20 @@ function CustomerInfo() {
         nextPage();
     }
 
+    const ToggleButton = styled(MuiToggleButton)({
+        "&.Mui-selected, &.Mui-selected:hover": {
+          color: 'black',
+          backgroundColor: 'tomato'
+        }
+      });
+
     return (
         <form onSubmit={handleSubmit}>
-            <br /><br /><br /> <br /><br /><br /><br /> <br /><br />
+            <br /><br /><br /> <br /><br />
+            <h1 style={{color: 'rgb(30, 30, 30)'}}>Enter contact information</h1>
             <ToggleButtonGroup
                 required
-                sx={[ 
-                    {backgroundColor: 'white'},
-                ]}
+                sx={{backgroundColor: 'white', width: '195px'}}
                 orientation='horizontal'
                 size='medium'
                 value={method}
@@ -68,49 +78,34 @@ function CustomerInfo() {
                 onChange={chooseMethod}
             >
                 <ToggleButton 
+                    sx={{backgroundColor: 'white', width: '98px'}}
                     value="Pick-up" 
                     key="pickUp" 
                     disableRipple 
-                    sx={[{ padding: '15px 36px' },
-                        {'&:focus': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:active': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:hover': {
-                            backgroundColor: 'white',
-                        }}]}> 
+                > 
                     <Tooltip title="Pick-up" placement='top'>
                         <TakeoutDiningIcon label='pick-up' />
                     </Tooltip>
                 </ToggleButton>,
                 <ToggleButton 
+                    sx={{backgroundColor: 'white', width: '99px'}}
                     value="Delivery" 
                     key="delivery" 
                     disableRipple 
-                    sx={[{ padding: '15px 36px' },
-                        {'&:focus': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:active': {
-                            backgroundColor: 'tomato',
-                        }},
-                        {'&:hover': {
-                            backgroundColor: 'white',
-                        }}]}> 
+                > 
                     <Tooltip title="Delivery" placement='top'>
                         <DeliveryDiningIcon label='delivery' />
                     </Tooltip>
                 </ToggleButton> 
             </ToggleButtonGroup>
-            <br />
+            <br /><br />
             <TextField 
                 label='Name'
                 required
                 type='text'
                 value={customer.customer_name}
                 onChange={(e) => setName(e.target.value)}
+                sx={{backgroundColor: 'white'}}
             >
             </TextField>
             <br />
@@ -120,6 +115,7 @@ function CustomerInfo() {
                 type='text'
                 value={customer.street_address}
                 onChange={(e) => setAddress(e.target.value)}
+                sx={{backgroundColor: 'white'}}
             >
             </TextField>
             < br />
@@ -129,6 +125,7 @@ function CustomerInfo() {
                 type='text'
                 value={customer.city}
                 onChange={(e) => setCity(e.target.value)}
+                sx={{backgroundColor: 'white'}}
             >
             </TextField>
             <br />
@@ -138,16 +135,24 @@ function CustomerInfo() {
                 type='text'
                 value={customer.zip}
                 onChange={(e) => setZip(e.target.value)}
+                sx={{backgroundColor: 'white'}}
             >
             </TextField>
-            < br/>
+            < br/>< br/>< br/>
             <Button 
-                sx={[ {backgroundColor: 'tomato'},
-                    {
-                      '&:hover': {
-                        backgroundColor: 'green',
-                      },
-                    }
+                sx={[ 
+                    {backgroundColor: 'white', color: 'black', marginRight: '25px'},
+                    {'&:hover': {backgroundColor: 'tomato'}}
+                ]}
+                onClick={goBack}
+                variant='contained' 
+                type='button'>
+                    Back
+            </Button>
+            <Button 
+                sx={[ 
+                    {backgroundColor: 'white', color: 'black', marginLeft: '25px'},
+                    {'&:hover': {backgroundColor: 'tomato'}}
                 ]}
                 variant='contained' 
                 type='submit'>
