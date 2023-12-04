@@ -27,12 +27,15 @@ const PizzaItem = (props) => {
     }
 
     return (
-        <ul>
-          
-            {pizzaList.map((pizza) => 
-          <li>{pizza}</li>  
-        )}
-        </ul>
+        <p>
+            {props.pizza.name}
+            <br />
+            {props.pizza.price}
+            <br />
+            {props.pizza.description}
+            <br />
+            <img src={props.pizza.image_path} />
+        </p>
     )
 }
 
