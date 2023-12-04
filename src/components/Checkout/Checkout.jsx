@@ -8,33 +8,37 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Table } from "@mui/material";
 
-
 function Checkout() {
-
-    const cart = useSelector(store => store.cart);
-    const customerInfo = useSelector(store => store.customerInfo);
+    const cart = useSelector(store => store.pizzaList);
+    const customerInfo = useSelector(store => store.customer);
 
     return(
         <>
             <h2> Checkout </h2>
-            <ul>
-                {customerInfo.map((customer, index) =>
-                <li key={index}>
-                    {customer.name}
-                    {customer.streetAdress}
-                    {customer.city}
-                    {customer.zip}
-                    {customer.type}
-                </li>
-                )}
+            <ul key={customerInfo.id}>
+                <p>
+                    {customerInfo.customer_name}
+                </p>
+                <p>
+                    {customerInfo.street_address}
+                </p>
+                <p>
+                    {customerInfo.city}
+                </p>
+                <p>
+                    {customerInfo.zip}
+                </p>
+                <p>
+                    {customerInfo.type}
+                </p>
             </ul>
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650}} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell class="column-header" align="left">Pizza</TableCell>
-                            <TableCell class="column-header" align="right">Price</TableCell>
+                            <TableCell className="column-header" align="left">Pizza</TableCell>
+                            <TableCell className="column-header" align="right">Price</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,7 +47,9 @@ function Checkout() {
                             <TableCell component={th} scope="row" align="left">
                                 {item.name}
                             </TableCell>
-                            <TableCell align="right">{item.price}</TableCell>
+                            <TableCell align="right">
+                                {item.price}
+                            </TableCell>
                            </TableRow>
                         ))}
                     </TableBody>
