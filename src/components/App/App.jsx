@@ -6,12 +6,17 @@ import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import Admin from '../Admin/Admin';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import Box from '@mui/material/Box';
+import { useSelector, useDispatch } from 'react-redux';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Box from '@mui/material/Box';
+import { Button } from '@mui/material';
 
 function App() {
   const total = useSelector(store => store.total);
+
+  const buttonStyle = {
+    marginBottom:'20px',
+  };
 
   return (
     <div className='App'>
@@ -19,16 +24,22 @@ function App() {
         <Route>
           <Header/>
         </Route>
-        <p>Pizza is great.</p>
+        <h3>Pizza is Great!</h3>
         <br />
         <Route exact path="/" >
           <br /><br />
           <img src='images/pizza_photo.png' />
           <nav>
             <ul>
-              <Link to="/select">View pizzas</Link>
+        
+              <Link to="/select">
+                <Button variant="contained" style={buttonStyle}>View pizzas</Button>
+              </Link>
               <br />
-              <Link to="/information">Enter Information</Link>
+              <Link to="/information">
+                <Button variant="contained" style={buttonStyle}>Enter Information</Button>
+                </Link>
+             
             </ul>
           </nav>
         </Route>
