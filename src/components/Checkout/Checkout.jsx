@@ -5,38 +5,57 @@ import { Table, TableBody, TableCell, TableContainer,
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Checkout() {
-    const cart = useSelector(store => store.cart);
     const customerInfo = useSelector(store => store.customer);
     const customer = useSelector(store => store.customer);
     const dispatch = useDispatch();
 
     const history = useHistory();
-    const nextPage = (event) => {
-        history.push('/');
+    const nextPage = () => {
+        history.push('/confirmation');
     }
-    const goBack = (event) => {
+    const goBack = () => {
         history.push('/information');
     }
 
     const submitOrder = (event) => {
         event.preventDefault();
-        axios.post('/api/order', {
-            customer_name: customer.customer_name,
-            street_address: customer.street_address,
-            city: customer.city,
-            zip: customer.zip,
-            type: customer.type,
-            total: customer.total,
-            pizzas: customer.pizzas
-            }).then((response) => {
-                dispatch({ type: 'CLEAR' });
-                nextPage();
-            }).catch((error) => {
-                console.log('Error submitting order:', error);
-                alert('Something went wrong!');
-            });
+        Swal.fire({
+            title: "Ready to order?",
+            text: "Send it to the kitchen!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "rgb(157, 157, 49)",
+            cancelButtonColor: "tomato",
+            confirmButtonText: "Submit order",
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/api/order', {
+                    customer_name: customer.customer_name,
+                    street_address: customer.street_address,
+                    city: customer.city,
+                    zip: customer.zip,
+                    type: customer.type,
+                    total: customer.total,
+                    pizzas: customer.pizzas
+                    }).then((response) => {
+                        dispatch({ type: 'CLEAR' });
+                        nextPage();
+                    }).catch((error) => {
+                        console.log('Error submitting order:', error);
+                        alert('Something went wrong!');
+                    });
+                Swal.fire({
+                    title: "Your order has been placed!",
+                    text: "Our kitchen is preparing your order now.",
+                    icon: "success",
+                    confirmButtonColor: "goldenrod"
+                });
+            }
+        });
     }
 
     return(
@@ -55,14 +74,14 @@ function Checkout() {
             <Button 
                 sx={[ 
                     {backgroundColor: 'white', color: 'black', marginLeft: '25px'},
-                    {'&:hover': {backgroundColor: 'tomato'}}
+                    {'&:hover': {backgroundColor: 'rgb(157, 157, 49)'}}
                 ]}
                 onClick={submitOrder}
                 variant='contained' 
                 type='submit'>
                     Submit
             </Button>
-            <h2>Review Cart</h2>
+            <h2>Review Order</h2>
             <Box key={customerInfo.id}
                 sx={{ backgroundColor: 'white', border: '1px solid black', 
                 borderRadius: '10px', width: '200px', margin: 'auto' }}>
@@ -103,7 +122,7 @@ function Checkout() {
                     </TableBody>
                 </Table>
             </TableContainer>
-        
+            <br /> <br /> <br />
         </div>
     )
 }

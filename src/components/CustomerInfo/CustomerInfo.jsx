@@ -9,32 +9,34 @@ import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'; 
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 function CustomerInfo() {
+    // retrieves reducers from store
     const total = useSelector(store => store.total);
     const pizzas = useSelector(store => store.cart);
     const customer = useSelector(store => store.customer);
     const dispatch = useDispatch();
 
+    // settings for Snackbar de/activation
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    }
     // routes to next page on submission of form
     const history = useHistory();
-    const nextPage = (event) => {
+    const nextPage = () => {
         history.push('/checkout');
     }
-    const goBack = (event) => {
+    // routes to previous page
+    const goBack = () => {
         history.push('/select');
     }
 
-    // forces the toggle button to highlight one option
-    const chooseMethod = (event, newMethod) => {
-        if (newMethod !== null) {
-            setMethod(newMethod);
-        }
-    }
-
     // declares variables for customer information
-    const [name, setName] = useState(customer.name);
-    const [address, setAddress] = useState(customer.address);
+    const [name, setName] = useState(customer.customer_name);
+    const [address, setAddress] = useState(customer.street_address);
     const [city, setCity] = useState(customer.city);
     const [zip, setZip] = useState(customer.zip);
     const [method, setMethod] = useState(customer.method);
@@ -51,31 +53,43 @@ function CustomerInfo() {
     // executes on submission of form, sends customer object to reducer
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(newCustomer);
-        const action = { type: 'SUBMIT_CUSTOMER_INFO', payload: newCustomer }
-        dispatch(action);
-        nextPage();
+        if (method !== undefined) {
+            const action = { type: 'SUBMIT_CUSTOMER_INFO', payload: newCustomer }
+            dispatch(action);
+            nextPage();
+        }
+        else {
+            setOpen(true);
+        }
     }
 
+    // stops toggle from reselecting previous value or undefined
+    const chooseMethod = (newMethod) => {
+        console.log(method, newMethod);
+        if ((newMethod !== method) && (newMethod !== 'undefined')) {
+            setMethod(newMethod);
+        }
+    }
+
+    // styling for toggle button
     const ToggleButton = styled(MuiToggleButton)({
         "&.Mui-selected, &.Mui-selected:hover": {
           color: 'black',
-          backgroundColor: 'tomato'
+          backgroundColor: 'goldenrod'
         }
       });
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <br /><br /><br /> <br /><br />
             <h1 style={{color: 'rgb(30, 30, 30)'}}>Enter contact information</h1>
             <ToggleButtonGroup
-                required
                 sx={{backgroundColor: 'white', width: '195px'}}
                 orientation='horizontal'
                 size='medium'
                 value={method}
                 exclusive
-                onChange={chooseMethod}
+                onChange={(e) => chooseMethod(String(e.target.value))}
             >
                 <ToggleButton 
                     sx={{backgroundColor: 'white', width: '98px'}}
@@ -103,7 +117,7 @@ function CustomerInfo() {
                 label='Name'
                 required
                 type='text'
-                value={customer.customer_name}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 sx={{backgroundColor: 'white'}}
             >
@@ -113,7 +127,7 @@ function CustomerInfo() {
                 label='Address'
                 required
                 type='text'
-                value={customer.street_address}
+                value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 sx={{backgroundColor: 'white'}}
             >
@@ -123,7 +137,7 @@ function CustomerInfo() {
                 label='City'
                 required
                 type='text'
-                value={customer.city}
+                value={city}
                 onChange={(e) => setCity(e.target.value)}
                 sx={{backgroundColor: 'white'}}
             >
@@ -133,7 +147,7 @@ function CustomerInfo() {
                 label='Zip'
                 required
                 type='text'
-                value={customer.zip}
+                value={zip}
                 onChange={(e) => setZip(e.target.value)}
                 sx={{backgroundColor: 'white'}}
             >
@@ -152,12 +166,17 @@ function CustomerInfo() {
             <Button 
                 sx={[ 
                     {backgroundColor: 'white', color: 'black', marginLeft: '25px'},
-                    {'&:hover': {backgroundColor: 'tomato'}}
+                    {'&:hover': {backgroundColor: 'rgb(157, 157, 49)'}}
                 ]}
-                variant='contained' 
-                type='submit'>
+                onClick={handleSubmit}
+                variant='contained'>
                     Next
             </Button>
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+                    You must choose either pick-up or delivery to continue.
+                </Alert>
+            </Snackbar>
         </form>
     )
 }

@@ -23,7 +23,12 @@ const cart = (state = [], action) => {
     return state;
 }
 
-const customer = (state = {}, action) => {
+const customer = (state = 
+    {customer_name: '',
+        street_address: '',
+        city: '',
+        zip: '',
+        type: ''}, action) => {
     if (action.type === 'CLEAR') {
         return {};
     }

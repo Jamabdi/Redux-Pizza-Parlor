@@ -57,7 +57,14 @@ const PizzaItem = (props) => {
                     ${props.pizza.price}
                 </CardContent>
                 <CardActions sx={{ justifyContent: 'center', padding: '0px' }}>
-                    <Button variant='contained' onClick={addPizza} sx={{ color: 'black', backgroundColor: 'tomato' }}>Add to cart</Button>
+                    <Button variant='contained' onClick={addPizza} 
+                        sx={[ 
+                            {color: 'white'}, 
+                            {backgroundColor: 'tomato'}, 
+                            {'&:hover': {
+                                backgroundColor: 'rgb(157, 157, 49)'
+                            }} 
+                        ]}>Add to cart</Button>
                     <IconButton onClick={decreaseQuantity}>
                         <RemoveIcon sx={{fontSize: '40px', color:'rgb(133, 133, 133)'}} />   
                     </IconButton>
