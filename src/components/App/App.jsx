@@ -5,17 +5,16 @@ import Footer from '../Footer/Footer';
 import SelectPizza from '../Select Pizza/SelectPizza';
 import CustomerInfo from '../CustomerInfo/CustomerInfo';
 import Admin from '../Admin/Admin';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button } from '@mui/material';
 import Checkout from '../Checkout/Checkout';
+import EndPage from '../EndPage/EndPage';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 function App() {
-  const total = useSelector(store => store.total);
-
   const buttonStyle = {
     marginBottom:'20px',
-    backgroundColor:'tomato'
+    backgroundColor:'tomato',
+    color: 'black'
   };
 
   return (
@@ -27,7 +26,7 @@ function App() {
         <h3>Pizza is Great!</h3>
         <br />
         <Route exact path="/" >
-          <br /><br />
+          <br /><br /><br /><br />
           <img src='images/pizza_photo.png' />
           <br /><br />
           <nav>
@@ -54,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/admin">
           <Admin/>
+        </Route>
+        <Route exact path="/confirmation">
+          <EndPage/>
         </Route>
       </Router>
     </div>

@@ -10,10 +10,10 @@ const SelectPizza = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const nextPage = (event) => {
+    const nextPage = () => {
         history.push('/information');
     }
-    const goBack = (event) => {
+    const goBack = () => {
         history.push('/');
     }
 
@@ -21,7 +21,6 @@ const SelectPizza = () => {
         axios.get('/api/pizza').then((response) => {
             const action = { type: 'SET_PIZZA_LIST', payload: response.data };
             dispatch(action);
-            console.log(response.data);
             setPizzaList(response.data);
         }).catch((error) => {
             console.log('GET /pizza error', error);
@@ -49,7 +48,7 @@ const SelectPizza = () => {
             Order any of our pizzas below!
             <Button 
                 sx={[ {backgroundColor: 'white', color: 'black', marginLeft: '25px'},
-                {'&:hover': {backgroundColor: 'tomato'}}
+                {'&:hover': {backgroundColor: 'rgb(157, 157, 49)'}}
                 ]}
                 onClick={nextPage}
                 variant='contained' 
